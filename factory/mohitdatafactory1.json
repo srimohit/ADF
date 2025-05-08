@@ -1,0 +1,9 @@
+{
+	"name": "mohitdatafactory1",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bcfefbef-5938-4387-8fde-f0dd0abfa9e3",
+		"tenantId": "eec79bce-beef-466e-8146-934b62a7405f"
+	}
+}
