@@ -1,0 +1,40 @@
+{
+	"name": "blobsinkforincremental",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('Incremental_load---',pipeline().RunId,'.csv')",
+					"type": "Expression"
+				},
+				"container": "sink"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "person_id",
+				"type": "String"
+			},
+			{
+				"name": "person_name",
+				"type": "String"
+			},
+			{
+				"name": "lastmodifydate",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

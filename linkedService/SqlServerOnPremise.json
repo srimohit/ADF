@@ -1,0 +1,21 @@
+{
+	"name": "SqlServerOnPremise",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "MOHIT\\SQLEXPRESS",
+			"database": "aadhaar",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "mohitsrivastava",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4NjNmM2ZiOC1mOGM1LTRjYmItOTMzOS02ZjlmYzk1MTNlYmQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,68 @@
+{
+	"name": "Conditional_split",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "AzureSqlDatabase1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MaleBlobAadhaar",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "FemaleBlobAadhaar",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Aadhaar Number} as string,",
+				"          Name as string,",
+				"          {Date of Birth} as string,",
+				"          Gender as string,",
+				"          City as string,",
+				"          State as string,",
+				"          {Phone Number} as string,",
+				"          Email as string",
+				"     ),",
+				"     allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'mo',",
+				"     tableName: 'aadhaar',",
+				"     isolationLevel: 'READ_UNCOMMITTED') ~> source1",
+				"source1 split(Gender=='Male',",
+				"     Gender=='Female',",
+				"     disjoint: true) ~> split1@(Male, Female)",
+				"split1@Male sink(allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1",
+				"split1@Female sink(allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink2"
+			]
+		}
+	}
+}

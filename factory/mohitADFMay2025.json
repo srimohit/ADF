@@ -1,0 +1,9 @@
+{
+	"name": "mohitADFMay2025",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d35efc30-a044-409e-a5aa-bee0a00374cb",
+		"tenantId": "32a5b90a-ca93-4746-8614-c9f103d65d68"
+	}
+}

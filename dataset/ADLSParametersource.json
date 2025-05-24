@@ -1,0 +1,67 @@
+{
+	"name": "ADLSParametersource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSParameter1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"FileName": "Aadhaar.csv",
+				"FolderName": "source"
+			}
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			},
+			"FolderName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().FolderName",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ProductName",
+				"type": "String"
+			},
+			{
+				"name": "Year",
+				"type": "String"
+			},
+			{
+				"name": "AvgUnitsold",
+				"type": "String"
+			},
+			{
+				"name": "HighestUnitSold",
+				"type": "String"
+			},
+			{
+				"name": "lowestUnitSold",
+				"type": "String"
+			},
+			{
+				"name": "TotalUnitsSold",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
