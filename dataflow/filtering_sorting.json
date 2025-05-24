@@ -1,0 +1,68 @@
+{
+	"name": "filtering_sorting",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AadhaarADLS",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AadhaarADLS",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "sort1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Aadhaar Number} as string,",
+				"          Name as string,",
+				"          {Date of Birth} as string,",
+				"          Gender as string,",
+				"          City as string,",
+				"          State as string,",
+				"          {Phone Number} as string,",
+				"          Email as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 filter(or((State==     'Assam'), (Gender=='Female'))) ~> filter1",
+				"filter1 sort(desc(State, true)) ~> sort1",
+				"sort1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {Aadhaar Number} as string,",
+				"          Name as string,",
+				"          {Date of Birth} as string,",
+				"          Gender as string,",
+				"          City as string,",
+				"          State as string,",
+				"          {Phone Number} as string,",
+				"          Email as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

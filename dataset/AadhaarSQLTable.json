@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "AadhaarSQLTable",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
@@ -9,7 +9,7 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "dbo",
+			"schema": "mo",
 			"table": "aadhaar"
 		}
 	},

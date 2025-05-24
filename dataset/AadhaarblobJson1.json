@@ -1,0 +1,19 @@
+{
+	"name": "AadhaarblobJson1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageJson",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "sink"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
