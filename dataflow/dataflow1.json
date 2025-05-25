@@ -1,0 +1,49 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "configtableSQL",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "split1"
+				},
+				{
+					"name": "lookup1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Source as string,",
+				"          Source_Table as string,",
+				"          Dest_Table as string,",
+				"          Columns as string,",
+				"          Watermark_Column as string,",
+				"          Watermark_Value as string,",
+				"          Enabled as integer,",
+				"          Load_Flag as string,",
+				"          Status as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 split(Load_Flag=='Incremental',",
+				"     Load_Flag=='Full',",
+				"     disjoint: false) ~> split1@(Incremental, Full)",
+				"split1@Incremental lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     multiple: true,",
+				"     broadcast: 'auto')~> lookup1"
+			]
+		}
+	}
+}
