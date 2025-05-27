@@ -12,7 +12,15 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AadhaarADLS",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "split1"
@@ -42,7 +50,24 @@
 				"     disjoint: false) ~> split1@(Incremental, Full)",
 				"split1@Incremental lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
 				"     multiple: true,",
-				"     broadcast: 'auto')~> lookup1"
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {Aadhaar Number} as string,",
+				"          Name as string,",
+				"          {Date of Birth} as string,",
+				"          Gender as string,",
+				"          City as string,",
+				"          State as string,",
+				"          {Phone Number} as string,",
+				"          Email as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
