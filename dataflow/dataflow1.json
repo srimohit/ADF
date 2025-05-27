@@ -24,9 +24,6 @@
 			"transformations": [
 				{
 					"name": "split1"
-				},
-				{
-					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -48,10 +45,7 @@
 				"source1 split(Load_Flag=='Incremental',",
 				"     Load_Flag=='Full',",
 				"     disjoint: false) ~> split1@(Incremental, Full)",
-				"split1@Incremental lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     multiple: true,",
-				"     broadcast: 'auto')~> lookup1",
-				"lookup1 sink(allowSchemaDrift: true,",
+				"split1@Incremental sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          {Aadhaar Number} as string,",
